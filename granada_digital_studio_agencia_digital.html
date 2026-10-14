@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granada Digital Studio | Innovación & Tradición Digital</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alhambra: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#d97706',
+                            600: '#b45309',
+                            800: '#92400e',
+                        },
+                        terracotta: {
+                            400: '#e07a5f',
+                            500: '#d15336',
+                            600: '#b33d23',
+                            900: '#4a150b',
+                        },
+                        granada: {
+                            dark: '#1c1917',
+                            olive: '#526e48',
+                            oliveLight: '#7d9d6f',
+                            cream: '#fdfbf7',
+                            gold: '#d4af37',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .alhambra-pattern {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#d15336 0.75px, transparent 0.75px), radial-gradient(#d15336 0.75px, #fdfbf7 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+            opacity: 0.95;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #d15336 0%, #b45309 50%, #526e48 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(209, 83, 54, 0.1);
+        }
+
+        .glass-card-dark {
+            background: rgba(28, 25, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="font-sans bg-granada-cream text-stone-800 antialiased selection:bg-terracotta-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Header / Sticky Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-granada-cream/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-terracotta-500 via-alhambra-500 to-granada-gold flex items-center justify-center text-white shadow-md transform group-hover:rotate-6 transition-transform">
+                        <i class="fa-solid me-0 fa-mountain-sun text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl tracking-tight text-stone-900 group-hover:text-terracotta-500 transition-colors">Granada<span class="text-terracotta-500">.</span>Digital</span>
+                        <span class="block text-[10px] uppercase tracking-widest text-stone-500 -mt-1 font-semibold">Studio Creativo</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-stone-700">
+                    <a href="#inicio" class="hover:text-terracotta-500 transition-colors">Inicio</a>
+                    <a href="#servicios" class="hover:text-terracotta-500 transition-colors">Servicios</a>
+                    <a href="#proyectos" class="hover:text-terracotta-500 transition-colors">Proyectos</a>
+                    <a href="#calculadora" class="hover:text-terracotta-500 transition-colors">Presupuesto</a>
+                    <a href="#nosotros" class="hover:text-terracotta-500 transition-colors">Sobre Nosotros</a>
+                    <a href="#contacto" class="hover:text-terracotta-500 transition-colors">Contacto</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="tel:+34958001122" class="text-xs font-semibold text-stone-600 hover:text-terracotta-500 flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-terracotta-500"></i> +34 958 21 04 88
+                    </a>
+                    <a href="#calculadora" class="px-5 py-2.5 rounded-full bg-stone-900 text-white text-xs font-semibold hover:bg-terracotta-500 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                        Cotizador Online
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none" aria-label="Abrir menú">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Inicio</a>
+            <a href="#servicios" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Servicios</a>
+            <a href="#proyectos" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Proyectos</a>
+            <a href="#calculadora" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Presupuesto</a>
+            <a href="#nosotros" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Sobre Nosotros</a>
+            <a href="#contacto" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-terracotta-500">Contacto</a>
+            <div class="pt-4 border-t border-stone-100 flex flex-col gap-3">
+                <a href="#calculadora" class="w-full text-center px-4 py-3 rounded-xl bg-terracotta-500 text-white font-semibold text-sm">Solicitar Presupuesto</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+
+        <!-- Hero Section -->
+        <section id="inicio" class="relative overflow-hidden alhambra-pattern py-20 lg:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracotta-500/10 border border-terracotta-500/20 text-terracotta-600 text-xs font-bold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-terracotta-500 animate-pulse"></span>
+                            Estudio Digital en el Centro de Granada
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.15]">
+                            Elevamos marcas globales con la <span class="font-serif italic font-normal gradient-text">esencia única</span> de Granada.
+                        </h1>
+
+                        <p class="text-lg text-stone-600 max-w-2xl mx-auto lg:mx-0 font-normal">
+                            Fusionamos la innovación tecnológica más vanguardista con la herencia artesanal y la belleza del Albaicín. Creamos productos digitales que cautivan, posicionan y convierten.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                            <a href="#calculadora" class="px-8 py-4 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-base shadow-lg shadow-terracotta-500/25 hover:shadow-terracotta-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3">
+                                <span>Calcula tu Presupuesto</span>
+                                <i class="fa-solid fa-calculator text-sm"></i>
+                            </a>
+                            <a href="#proyectos" class="px-8 py-4 rounded-xl bg-white border border-stone-200 hover:border-terracotta-500 text-stone-800 font-semibold text-base shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2">
+                                <span>Ver Trabajo Local</span>
+                                <i class="fa-solid fa-arrow-right text-sm text-terracotta-500"></i>
+                            </a>
+                        </div>
+
+                        <!-- Local trust badges -->
+                        <div class="pt-8 border-t border-stone-200/60 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <span class="block text-2xl font-black text-stone-900 font-serif">+120</span>
+                                <span class="text-xs text-stone-500 font-medium">Proyectos Lanzados</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-black text-stone-900 font-serif">99%</span>
+                                <span class="text-xs text-stone-500 font-medium">Clientes Satisfechos</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-black text-stone-900 font-serif">100%</span>
+                                <span class="text-xs text-stone-500 font-medium">Sello Granadino</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Graphic Hero Graphic -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+                            <div class="absolute -top-4 -left-4 w-72 h-72 bg-terracotta-500/10 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-4 -right-4 w-72 h-72 bg-granada-olive/10 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative glass-card rounded-3xl p-6 shadow-2xl space-y-6">
+                                <div class="relative h-64 rounded-2xl overflow-hidden shadow-inner bg-gradient-to-br from-stone-900 to-terracotta-900 flex flex-col justify-between p-6 text-white">
+                                    <div class="flex justify-between items-start">
+                                        <div class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-medium text-granada-gold border border-white/20">
+                                            <i class="fa-solid fa-location-dot me-1"></i> Gran Vía de Colón, Granada
+                                        </div>
+                                        <i class="fa-solid fa-sun text-granada-gold text-2xl animate-spin-slow"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <p class="text-xs uppercase tracking-widest text-stone-300">Diseño & Desarrollo Premium</p>
+                                        <h3 class="text-2xl font-serif font-bold text-white">Donde la historia abraza el futuro digital</h3>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-2xl p-4 shadow-sm border border-stone-100 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-granada-olive/10 text-granada-olive flex items-center justify-center font-bold">
+                                            <i class="fa-solid fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-stone-800">Velocidad & SEO de Éxito</p>
+                                            <p class="text-xs text-stone-500">Optimizados para Google & IA</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">100/100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicios" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Nuestras Soluciones</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Servicios diseñados para hacer crecer tu empresa</h2>
+                    <p class="text-stone-600">Ofrecemos un ecosistema de desarrollo y marketing integral adaptado tanto al comercio local como a empresas con proyección internacional.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Service 1 -->
+                    <div class="bg-granada-cream rounded-2xl p-8 border border-stone-200/80 hover:border-terracotta-500 hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-terracotta-500/10 text-terracotta-500 flex items-center justify-center text-2xl mb-6 group-hover:bg-terracotta-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-terracotta-500 transition-colors">Desarrollo Web & Apps</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                            Webs corporativas, e-commerce y aplicaciones a medida con Next.js, React y WordPress optimizadas al milímetro.
+                        </p>
+                        <ul class="text-xs text-stone-500 space-y-2 font-medium">
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Tiendas Online (Shopify/Woo)</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Carga ultrarrápida</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="bg-granada-cream rounded-2xl p-8 border border-stone-200/80 hover:border-terracotta-500 hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-alhambra-500/10 text-alhambra-600 flex items-center justify-center text-2xl mb-6 group-hover:bg-alhambra-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-alhambra-600 transition-colors">SEO & Marketing</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                            Posicionamiento local en Granada y nacional. Estrategias de captación de clientes y publicidad en Google & Ads.
+                        </p>
+                        <ul class="text-xs text-stone-500 space-y-2 font-medium">
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>SEO Local Granada</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Campañas de SEM/Meta</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="bg-granada-cream rounded-2xl p-8 border border-stone-200/80 hover:border-terracotta-500 hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-granada-olive/10 text-granada-olive flex items-center justify-center text-2xl mb-6 group-hover:bg-granada-olive group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-granada-olive transition-colors">Branding & UI/UX</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                            Creación de identidades visuales únicas, logotipos, manuales de marca y prototipos orientados a la conversión.
+                        </p>
+                        <ul class="text-xs text-stone-500 space-y-2 font-medium">
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Diseño de Logotipo</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Diseño UI de Apps</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="bg-granada-cream rounded-2xl p-8 border border-stone-200/80 hover:border-terracotta-500 hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-stone-900/10 text-stone-900 flex items-center justify-center text-2xl mb-6 group-hover:bg-stone-900 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-stone-900 transition-colors">Consultoría & IA</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                            Digitalización para PYMES, automatizaciones e integración de inteligencia artificial para ahorrar costes operativos.
+                        </p>
+                        <ul class="text-xs text-stone-500 space-y-2 font-medium">
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Automatizaciones</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 me-2"></i>Kit Digital Acompañamiento</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section with Filtering -->
+        <section id="proyectos" class="py-24 bg-stone-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Casos de Éxito</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-2">Proyectos con alma y resultados</h2>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                        <button class="filter-btn active px-4 py-2 rounded-full text-xs font-semibold bg-terracotta-500 text-white shadow-sm transition-all" data-filter="all">Todos</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-stone-600 hover:bg-stone-200 transition-all" data-filter="web">Desarrollo Web</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-stone-600 hover:bg-stone-200 transition-all" data-filter="branding">Branding</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-stone-600 hover:bg-stone-200 transition-all" data-filter="seo">SEO & Marketing</button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                    
+                    <!-- Project Item 1 -->
+                    <div class="project-card bg-white rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300" data-category="web">
+                        <div class="relative h-56 bg-stone-800 overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Bodegas Sierra Nevada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openProjectModal('Bodega Sierra Nevada', 'E-commerce exclusivo y desarrollo a medida para una de las bodegas tradicionales de la Alpujarra Granadina.', 'Web / E-Commerce', 'Next.js, WooCommerce, Tailwind', 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80')" class="px-4 py-2 rounded-full bg-white text-stone-900 font-bold text-xs shadow-lg hover:bg-terracotta-500 hover:text-white transition-colors">
+                                    Ver Detalles <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-terracotta-500">E-Commerce & Web</span>
+                            <h3 class="text-xl font-bold text-stone-900">Bodega Sierra Nevada</h3>
+                            <p class="text-xs text-stone-500 line-clamp-2">Plataforma de venta online de vinos de alta montaña con envío internacional y reservas de catas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 2 -->
+                    <div class="project-card bg-white rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300" data-category="branding">
+                        <div class="relative h-56 bg-stone-800 overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Hotel Albayzín Charm" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openProjectModal('Hotel Boutique Albayzín', 'Rediseño de identidad de marca completa, fotografía conceptual y sitio web con motor de reservas propio.', 'Branding & UX', 'Figma, Illustrator, WordPress', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80')" class="px-4 py-2 rounded-full bg-white text-stone-900 font-bold text-xs shadow-lg hover:bg-terracotta-500 hover:text-white transition-colors">
+                                    Ver Detalles <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-granada-olive">Branding & UI/UX</span>
+                            <h3 class="text-xl font-bold text-stone-900">Hotel Boutique Albayzín</h3>
+                            <p class="text-xs text-stone-500 line-clamp-2">Rebranding premium y diseño web interactivo con vista panorámica a la Alhambra.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 3 -->
+                    <div class="project-card bg-white rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300" data-category="web">
+                        <div class="relative h-56 bg-stone-800 overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Tapas Granada App" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openProjectModal('Tapas & Co. Granada App', 'Aplicación móvil interactiva con mapa en tiempo real para encontrar las mejores rutas de tapas en el centro de Granada.', 'Mobile App', 'React Native, Node.js, Maps API', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80')" class="px-4 py-2 rounded-full bg-white text-stone-900 font-bold text-xs shadow-lg hover:bg-terracotta-500 hover:text-white transition-colors">
+                                    Ver Detalles <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-terracotta-500">App Móvil</span>
+                            <h3 class="text-xl font-bold text-stone-900">Tapas & Co. Granada</h3>
+                            <p class="text-xs text-stone-500 line-clamp-2">Aplicación móvil gastronómica con geolocalización y carta digital QR para hostelería local.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 4 -->
+                    <div class="project-card bg-white rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300" data-category="seo">
+                        <div class="relative h-56 bg-stone-800 overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Bufete Gran Vía" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openProjectModal('Bufete Gran Vía Abogados', 'Estrategia integral de SEO local y campañas de Google Ads que triplicaron la captación de clientes en la provincia.', 'SEO Local', 'Google Ads, SEO, Copywriting', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80')" class="px-4 py-2 rounded-full bg-white text-stone-900 font-bold text-xs shadow-lg hover:bg-terracotta-500 hover:text-white transition-colors">
+                                    Ver Detalles <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-alhambra-600">Estrategia SEO</span>
+                            <h3 class="text-xl font-bold text-stone-900">Bufete Gran Vía Abogados</h3>
+                            <p class="text-xs text-stone-500 line-clamp-2">Posicionamiento en Google en las palabras clave más competitivas de servicios jurídicos en Andalucía.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Budget Calculator Section -->
+        <section id="calculadora" class="py-24 bg-white relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Transparencia Total</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Calcula tu presupuesto estimado</h2>
+                    <p class="text-stone-600">Selecciona las necesidades de tu proyecto y obtén una estimación aproximada en tiempo real sin compromiso.</p>
+                </div>
+
+                <div class="bg-granada-cream rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Calculator Options -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- Step 1: Project Type -->
+                        <div>
+                            <label class="block text-sm font-bold text-stone-900 mb-3">1. Tipo de Proyecto Principal</label>
+                            <div class="grid grid-cols-2 gap-3" id="calc-type">
+                                <label class="calc-option border-2 border-terracotta-500 bg-terracotta-500/5 rounded-xl p-3 cursor-pointer flex flex-col items-center text-center transition-all">
+                                    <input type="radio" name="project_type" value="650" data-name="Web Corporativa" checked class="sr-only">
+                                    <i class="fa-solid fa-globe text-terracotta-500 text-xl mb-1"></i>
+                                    <span class="text-xs font-bold text-stone-800">Web Corporativa</span>
+                                    <span class="text-[10px] text-stone-500">Desde 650€</span>
+                                </label>
+
+                                <label class="calc-option border-2 border-stone-200 bg-white rounded-xl p-3 cursor-pointer flex flex-col items-center text-center transition-all">
+                                    <input type="radio" name="project_type" value="1200" data-name="Tienda Online (E-commerce)" class="sr-only">
+                                    <i class="fa-solid fa-cart-shopping text-stone-600 text-xl mb-1"></i>
+                                    <span class="text-xs font-bold text-stone-800">Tienda Online</span>
+                                    <span class="text-[10px] text-stone-500">Desde 1.200€</span>
+                                </label>
+
+                                <label class="calc-option border-2 border-stone-200 bg-white rounded-xl p-3 cursor-pointer flex flex-col items-center text-center transition-all">
+                                    <input type="radio" name="project_type" value="1800" data-name="App Móvil / Web App" class="sr-only">
+                                    <i class="fa-solid fa-mobile-screen text-stone-600 text-xl mb-1"></i>
+                                    <span class="text-xs font-bold text-stone-800">Aplicación Móvil</span>
+                                    <span class="text-[10px] text-stone-500">Desde 1.800€</span>
+                                </label>
+
+                                <label class="calc-option border-2 border-stone-200 bg-white rounded-xl p-3 cursor-pointer flex flex-col items-center text-center transition-all">
+                                    <input type="radio" name="project_type" value="450" data-name="Rediseño / Landing Page" class="sr-only">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-stone-600 text-xl mb-1"></i>
+                                    <span class="text-xs font-bold text-stone-800">Rediseño / Landing</span>
+                                    <span class="text-[10px] text-stone-500">Desde 450€</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Extras -->
+                        <div>
+                            <label class="block text-sm font-bold text-stone-900 mb-3">2. Servicios Adicionales</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center justify-between p-3 bg-white border border-stone-200 rounded-xl cursor-pointer hover:border-stone-300">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="300" data-name="Estrategia SEO & Posicionamiento" class="calc-addon rounded text-terracotta-500 focus:ring-terracotta-500 h-4 w-4">
+                                        <span class="text-xs font-semibold text-stone-800">SEO Inicial & Configuración Google Maps</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-stone-600">+300€</span>
+                                </label>
+
+                                <label class="flex items-center justify-between p-3 bg-white border border-stone-200 rounded-xl cursor-pointer hover:border-stone-300">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="250" data-name="Diseño de Marca (Logo & Manual)" class="calc-addon rounded text-terracotta-500 focus:ring-terracotta-500 h-4 w-4">
+                                        <span class="text-xs font-semibold text-stone-800">Diseño de Logotipo & Identidad</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-stone-600">+250€</span>
+                                </label>
+
+                                <label class="flex items-center justify-between p-3 bg-white border border-stone-200 rounded-xl cursor-pointer hover:border-stone-300">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="180" data-name="Soporte y Mantenimiento Anual" class="calc-addon rounded text-terracotta-500 focus:ring-terracotta-500 h-4 w-4">
+                                        <span class="text-xs font-semibold text-stone-800">Mantenimiento Web Anual & Hosting</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-stone-600">+180€/año</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Budget Summary Box -->
+                    <div class="lg:col-span-5 bg-stone-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-granada-gold">Resumen de Cotización</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Estimación Estimada</h3>
+                            
+                            <div class="mt-6 space-y-3 border-t border-stone-800 pt-4 text-xs text-stone-300" id="calc-summary-list">
+                                <div class="flex justify-between">
+                                    <span>Web Corporativa</span>
+                                    <span class="font-bold text-white">650€</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-stone-800 mt-6">
+                            <div class="flex justify-between items-baseline mb-4">
+                                <span class="text-sm text-stone-400">Total Estimado:</span>
+                                <span class="text-3xl font-extrabold text-granada-gold" id="calc-total">650€</span>
+                            </div>
+
+                            <button type="button" onclick="scrollToContactWithEstimate()" class="w-full py-3.5 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-sm shadow-md transition-colors text-center block">
+                                Solicitar Propuesta Oficial
+                            </button>
+                            <p class="text-[10px] text-stone-400 text-center mt-2">Los precios no incluyen IVA. Presupuesto final sujeto a reunión técnica.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="nosotros" class="py-24 bg-stone-900 text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="space-y-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-granada-gold">Inspiración & Tecnología</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold font-serif leading-tight">
+                            Apasionados por el diseño digital con el sello único de Granada
+                        </h2>
+                        <p class="text-stone-300 leading-relaxed text-sm">
+                            Nacimos en el corazón de la Gran Vía de Granada con una idea clara: trasladar el detalle, la calma y el ingenio característicos de nuestra tierra al apasionante mundo digital global.
+                        </p>
+                        <p class="text-stone-300 leading-relaxed text-sm">
+                            Creemos en relaciones cercanas y transparentes. No somos solo proveedores de código; somos tu equipo de innovación digital en Granada.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="p-4 rounded-xl bg-stone-800/80 border border-stone-700">
+                                <i class="fa-solid fa-heart text-terracotta-500 text-xl mb-2"></i>
+                                <h4 class="font-bold text-sm text-white">Compromiso Local</h4>
+                                <p class="text-xs text-stone-400">Impulsamos la digitalización del tejido empresarial andaluz.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-stone-800/80 border border-stone-700">
+                                <i class="fa-solid fa-microchip text-granada-gold text-xl mb-2"></i>
+                                <h4 class="font-bold text-sm text-white">Vanguardia Tech</h4>
+                                <p class="text-xs text-stone-400">Utilizamos los frameworks e IA más eficientes del mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map / Location Representation -->
+                    <div class="bg-stone-800 rounded-3xl p-6 border border-stone-700 space-y-4">
+                        <div class="flex justify-between items-center pb-4 border-b border-stone-700">
+                            <div>
+                                <h3 class="font-bold text-base text-white"><i class="fa-solid fa-compass text-terracotta-500 me-2"></i>Oficina Central</h3>
+                                <p class="text-xs text-stone-400">Gran Vía de Colón, 24, 18010 Granada</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold">Abierto hoy</span>
+                        </div>
+
+                        <!-- Simulated Interactive Map graphic -->
+                        <div class="relative h-64 rounded-2xl bg-stone-900 overflow-hidden flex items-center justify-center border border-stone-700">
+                            <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#d15336_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            <div class="relative text-center p-4">
+                                <div class="w-12 h-12 rounded-full bg-terracotta-500 text-white flex items-center justify-center text-xl mx-auto mb-2 animate-bounce shadow-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <span class="bg-stone-900/90 text-white px-3 py-1 rounded-lg text-xs font-bold border border-stone-700 shadow-md">
+                                    Granada Digital Studio
+                                </span>
+                                <p class="text-[10px] text-stone-400 mt-2">A 5 minutos de la Catedral de Granada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Opiniones</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Lo que dicen nuestros clientes</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="bg-granada-cream rounded-2xl p-6 border border-stone-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-stone-600 italic">
+                            "El cambio en nuestro negocio tras lanzar la tienda online ha sido brutal. Entendieron la filosofía de nuestros productos desde el primer minuto."
+                        </p>
+                        <div class="pt-4 border-t border-stone-200/60 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-terracotta-500/20 font-bold text-terracotta-600 flex items-center justify-center text-xs">M.G.</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-stone-900">Manuel Gómez</h4>
+                                <p class="text-[10px] text-stone-500">Director, Bodegas Sierra Nevada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-granada-cream rounded-2xl p-6 border border-stone-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-stone-600 italic">
+                            "Excelentes profesionales en Granada. Lograron posicionar nuestra web en los primeros puestos de búsqueda para turismo rural en solo 4 meses."
+                        </p>
+                        <div class="pt-4 border-t border-stone-200/60 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-granada-olive/20 font-bold text-granada-olive flex items-center justify-center text-xs">C.R.</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-stone-900">Carmen Rodríguez</h4>
+                                <p class="text-[10px] text-stone-500">Propietaria, Hotel Boutique Albayzín</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-granada-cream rounded-2xl p-6 border border-stone-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-stone-600 italic">
+                            "Trato directo, transparente y un diseño espectacular para nuestra aplicación. Recomendados 100% para cualquier proyecto tecnológico."
+                        </p>
+                        <div class="pt-4 border-t border-stone-200/60 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-alhambra-500/20 font-bold text-alhambra-600 flex items-center justify-center text-xs">A.L.</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-stone-900">Alejandro López</h4>
+                                <p class="text-[10px] text-stone-500">Fundador, Tapas & Co.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto" class="py-24 bg-granada-cream relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Contact Info -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Hablemos de tu Proyecto</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-2">¿Tienes una idea en mente?</h2>
+                            <p class="text-sm text-stone-600 mt-3">Tómate un café virtual o presencial con nosotros en nuestro estudio en Granada.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-stone-200/80 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-terracotta-500/10 text-terracotta-500 flex items-center justify-center text-lg flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-stone-900 uppercase">Ubicación</h4>
+                                    <p class="text-xs text-stone-600 mt-0.5">Gran Vía de Colón, 24, 18010 Granada, España</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-stone-200/80 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-lg flex-shrink-0">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-stone-900 uppercase">WhatsApp Directo</h4>
+                                    <a href="https://wa.me/34958210488" target="_blank" class="text-xs text-emerald-600 font-semibold hover:underline mt-0.5 block">+34 958 21 04 88</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-stone-200/80 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-alhambra-500/10 text-alhambra-600 flex items-center justify-center text-lg flex-shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-stone-900 uppercase">Correo Electrónico</h4>
+                                    <a href="mailto:hola@granadadigital.studio" class="text-xs text-stone-600 hover:text-terracotta-500 mt-0.5 block">hola@granadadigital.studio</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 bg-white rounded-3xl p-8 border border-stone-200 shadow-xl">
+                        <form id="contact-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="nombre" class="block text-xs font-bold text-stone-800 uppercase mb-2">Nombre completo *</label>
+                                    <input type="text" id="nombre" required placeholder="Tu nombre" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-terracotta-500 text-xs">
+                                </div>
+                                <div>
+                                    <label for="telefono" class="block text-xs font-bold text-stone-800 uppercase mb-2">Teléfono *</label>
+                                    <input type="tel" id="telefono" required placeholder="+34 600 000 000" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-terracotta-500 text-xs">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-xs font-bold text-stone-800 uppercase mb-2">Correo electrónico *</label>
+                                <input type="email" id="email" required placeholder="tuemail@empresa.com" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-terracotta-500 text-xs">
+                            </div>
+
+                            <div>
+                                <label for="mensaje" class="block text-xs font-bold text-stone-800 uppercase mb-2">Detalles de la consulta *</label>
+                                <textarea id="mensaje" rows="4" required placeholder="Cuéntanos sobre tu idea o proyecto..." class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-terracotta-500 text-xs resize-none"></textarea>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="privacy" required class="rounded text-terracotta-500 focus:ring-terracotta-500 h-4 w-4">
+                                <label for="privacy" class="text-[11px] text-stone-500">Acepto la política de privacidad y protección de datos.</label>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-sm shadow-md transition-all">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-950 text-white pt-16 pb-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-stone-800">
+                
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-terracotta-500 flex items-center justify-center text-white font-bold text-sm">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                        </div>
+                        <span class="font-serif font-bold text-lg text-white">Granada.Digital</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        Estudio de diseño, desarrollo web y posicionamiento SEO con raíces en Granada, España.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li><a href="#inicio" class="hover:text-terracotta-500 transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-terracotta-500 transition-colors">Servicios</a></li>
+                        <li><a href="#proyectos" class="hover:text-terracotta-500 transition-colors">Proyectos</a></li>
+                        <li><a href="#calculadora" class="hover:text-terracotta-500 transition-colors">Presupuesto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li><a href="#servicios" class="hover:text-terracotta-500 transition-colors">Desarrollo Web</a></li>
+                        <li><a href="#servicios" class="hover:text-terracotta-500 transition-colors">Tiendas Online</a></li>
+                        <li><a href="#servicios" class="hover:text-terracotta-500 transition-colors">SEO Granada</a></li>
+                        <li><a href="#servicios" class="hover:text-terracotta-500 transition-colors">Diseño de Marca</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Síguenos</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-stone-900 border border-stone-800 flex items-center justify-center text-stone-400 hover:text-terracotta-500 hover:border-terracotta-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-stone-900 border border-stone-800 flex items-center justify-center text-stone-400 hover:text-terracotta-500 hover:border-terracotta-500 transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-stone-900 border border-stone-800 flex items-center justify-center text-stone-400 hover:text-terracotta-500 hover:border-terracotta-500 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-500 gap-4">
+                <p>&copy; 2026 Granada Digital Studio. Todos los derechos reservados.</p>
+                <p class="flex items-center gap-1">Diseñado con <i class="fa-solid fa-heart text-terracotta-500"></i> en Granada</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden bg-stone-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl space-y-6 p-6 relative">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 text-stone-600 hover:bg-stone-200 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="h-48 rounded-2xl overflow-hidden bg-stone-100">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+            </div>
+
+            <div class="space-y-3">
+                <span id="modal-category" class="text-[10px] font-bold uppercase tracking-widest text-terracotta-500"></span>
+                <h3 id="modal-title" class="text-2xl font-bold text-stone-900"></h3>
+                <p id="modal-desc" class="text-xs text-stone-600 leading-relaxed"></p>
+                <div class="pt-2">
+                    <span class="text-xs font-bold text-stone-800 block">Tecnologías empleadas:</span>
+                    <span id="modal-tech" class="text-xs text-stone-500 font-mono"></span>
+                </div>
+            </div>
+
+            <button onclick="closeProjectModal()" class="w-full py-3 rounded-xl bg-stone-900 text-white font-bold text-xs hover:bg-stone-800">
+                Cerrar Ventana
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Feedback Notification -->
+    <div id="notification" class="fixed bottom-6 right-6 z-50 hidden max-w-md bg-stone-900 text-white p-4 rounded-2xl shadow-2xl border border-stone-800 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <h4 class="text-xs font-bold">¡Mensaje Enviado!</h4>
+            <p class="text-[11px] text-stone-300">Nos pondremos en contacto contigo en menos de 24 horas.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Portfolio Category Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-terracotta-500', 'text-white');
+                    b.classList.add('bg-white', 'text-stone-600');
+                });
+                btn.classList.add('bg-terracotta-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-stone-600');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Interactive Budget Calculator Logic
+        const calcRadios = document.querySelectorAll('input[name="project_type"]');
+        const calcAddons = document.querySelectorAll('.calc-addon');
+        const calcTotalEl = document.getElementById('calc-total');
+        const calcSummaryList = document.getElementById('calc-summary-list');
+
+        function updateCalculator() {
+            let total = 0;
+            let summaryHTML = '';
+
+            // Selected Radio Base Option
+            const selectedRadio = document.querySelector('input[name="project_type"]:checked');
+            if (selectedRadio) {
+                const basePrice = parseInt(selectedRadio.value);
+                const baseName = selectedRadio.getAttribute('data-name');
+                total += basePrice;
+                summaryHTML += `<div class="flex justify-between"><span>${baseName}</span><span class="font-bold text-white">${basePrice}€</span></div>`;
+            }
+
+            // Radio options styling update
+            document.querySelectorAll('.calc-option').forEach(label => {
+                const radio = label.querySelector('input');
+                if (radio.checked) {
+                    label.classList.add('border-terracotta-500', 'bg-terracotta-500/5');
+                    label.classList.remove('border-stone-200', 'bg-white');
+                } else {
+                    label.classList.remove('border-terracotta-500', 'bg-terracotta-500/5');
+                    label.classList.add('border-stone-200', 'bg-white');
+                }
+            });
+
+            // Checked Addons
+            calcAddons.forEach(addon => {
+                if (addon.checked) {
+                    const price = parseInt(addon.value);
+                    const name = addon.getAttribute('data-name');
+                    total += price;
+                    summaryHTML += `<div class="flex justify-between text-stone-300"><span>${name}</span><span class="font-bold text-white">+${price}€</span></div>`;
+                }
+            });
+
+            calcTotalEl.innerText = `${total.toLocaleString()}€`;
+            calcSummaryList.innerHTML = summaryHTML;
+        }
+
+        calcRadios.forEach(radio => radio.addEventListener('change', updateCalculator));
+        calcAddons.forEach(addon => addon.addEventListener('change', updateCalculator));
+
+        function scrollToContactWithEstimate() {
+            const contactSection = document.getElementById('contacto');
+            const mensajeInput = document.getElementById('mensaje');
+            const totalText = calcTotalEl.innerText;
+            
+            mensajeInput.value = `Hola Granada Digital Studio, me gustaría solicitar una propuesta formal basada en mi estimación en la web de ${totalText}.`;
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Project Modal Handling
+        function openProjectModal(title, desc, category, tech, imgSrc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-category').innerText = category;
+            document.getElementById('modal-tech').innerText = tech;
+            document.getElementById('modal-img').src = imgSrc;
+            
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Contact Form Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const notification = document.getElementById('notification');
+            
+            notification.classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Initialize Calculator state
+        updateCalculator();
+    </script>
+</body>
+</html>
